@@ -1,0 +1,531 @@
+/* ===========================================
+   Video to GIF Converter - Complete CSS
+   =========================================== */
+
+/* ベーススタイル */
+body {
+  font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #000000;
+  line-height: 1.8;
+}
+
+/* ヘッダー */
+header {
+  background-color: #A9A9A9;
+  color: #000;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+header nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+}
+
+header nav ul li {
+  margin-left: 20px;
+}
+
+header nav ul li a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+  color: #007acc;
+}
+
+/* メインコンテナ */
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* 見出し */
+h2 {
+  font-size: 2rem;
+  color: #000;
+  border-bottom: 2px solid #007acc;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 1.3rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+/* 注意書き */
+.note {
+  font-size: 0.95rem;
+  color: #555;
+  margin-top: 1rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  border-left: 4px solid #007acc;
+}
+
+/* センターボックス */
+.center-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+/* ボタンスタイル */
+.contact-mail {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007acc;
+  color: #ffffff;
+  border-radius: 5px;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.contact-mail:hover {
+  background-color: #000000;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.contact-mail:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 結果画像 */
+#result img {
+  display: block;
+  margin: 2rem auto;
+  max-width: 80%;
+  height: auto;
+}
+
+/* ドラッグ&ドロップエリア */
+.upload-area {
+  border: 2px dashed #007acc;
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 1rem 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: rgba(0, 122, 204, 0.02);
+}
+
+.upload-area:hover {
+  background-color: rgba(0, 122, 204, 0.1);
+  border-color: #005c99;
+}
+
+.upload-area.dragover {
+  background-color: rgba(0, 122, 204, 0.2);
+  border-color: #000000;
+  transform: scale(1.02);
+}
+
+.upload-area p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #007acc;
+  font-weight: 500;
+}
+
+/* 設定パネル */
+.settings-panel {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin: 1rem 0;
+  text-align: left;
+  border: 1px solid #e9ecef;
+}
+
+.settings-panel h3 {
+  margin-top: 0;
+  color: #007acc;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 0.5rem;
+}
+
+.setting-group {
+  margin-bottom: 1rem;
+}
+
+.setting-group:last-child {
+  margin-bottom: 0;
+}
+
+.setting-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.setting-group input, 
+.setting-group select {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
+}
+
+.setting-group input:focus,
+.setting-group select:focus {
+  outline: none;
+  border-color: #007acc;
+  box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+}
+
+/* プログレスバー */
+.progress-bar {
+  width: 100%;
+  height: 20px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 1rem 0;
+  display: none;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #007acc, #0099ff);
+  transition: width 0.3s ease;
+  width: 0%;
+  border-radius: 10px;
+}
+
+/* プレビューエリア */
+.preview-area {
+  display: none;
+  margin: 2rem 0;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.preview-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.preview-box {
+  text-align: center;
+  flex: 1;
+  min-width: 250px;
+}
+
+.preview-box h3 {
+  margin-bottom: 1rem;
+  color: #007acc;
+}
+
+.video-preview, 
+.gif-preview {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: 2px solid #e9ecef;
+  transition: transform 0.3s ease;
+}
+
+.video-preview:hover,
+.gif-preview:hover {
+  transform: scale(1.05);
+}
+
+/* フッター */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #A9A9A9;
+  color: #FFF;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  header nav ul {
+    margin-top: 1rem;
+    justify-content: center;
+  }
+  
+  header nav ul li {
+    margin: 0 10px;
+  }
+  
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+  }
+  
+  .preview-container {
+    flex-direction: column;
+  }
+  
+  .preview-box {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .video-preview, 
+  .gif-preview {
+    max-width: 100%;
+    max-height: 200px;
+  }
+  
+  .upload-area {
+    padding: 1rem;
+  }
+  
+  .upload-area p {
+    font-size: 1rem;
+  }
+  
+  .settings-panel {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    margin: 0.5rem;
+    padding: 0.5rem;
+  }
+  
+  header h1 {
+    font-size: 1.2rem;
+  }
+  
+  header nav ul li {
+    margin: 0 5px;
+  }
+  
+  .contact-mail {
+    padding: 8px 16px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #121212;
+    color: #ffffff;
+  }
+
+  header {
+    background-color: #1e1e1e;
+    color: #ffffff;
+  }
+
+  header nav ul li a {
+    color: #ffffff;
+  }
+  
+  header nav ul li a:hover {
+    color: #66ccff;
+  }
+
+  .container {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  h2 {
+    color: #ffffff;
+    border-bottom: 2px solid #66ccff;
+  }
+  
+  h3 {
+    color: #e0e0e0;
+  }
+
+  .note {
+    color: #ccc;
+    background-color: #2a2a2a;
+    border-left-color: #66ccff;
+  }
+
+  .contact-mail {
+    background-color: #66ccff;
+    color: #000000;
+  }
+
+  .contact-mail:hover {
+    background-color: #ffffff;
+    color: #000000;
+  }
+  
+  .contact-mail:disabled {
+    background-color: #555;
+    color: #999;
+  }
+
+  footer {
+    background-color: #1e1e1e;
+    color: #cccccc;
+  }
+
+  a {
+    color: #66ccff;
+  }
+
+  a:hover {
+    color: #ffffff;
+  }
+  
+  .upload-area {
+    border-color: #66ccff;
+    background-color: rgba(102, 204, 255, 0.02);
+  }
+  
+  .upload-area:hover {
+    background-color: rgba(102, 204, 255, 0.1);
+    border-color: #4da6d9;
+  }
+  
+  .upload-area.dragover {
+    background-color: rgba(102, 204, 255, 0.2);
+    border-color: #ffffff;
+  }
+  
+  .upload-area p {
+    color: #66ccff;
+  }
+  
+  .settings-panel {
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+  
+  .settings-panel h3 {
+    color: #66ccff;
+    border-bottom-color: #444;
+  }
+  
+  .setting-group label {
+    color: #e0e0e0;
+  }
+  
+  .setting-group input, 
+  .setting-group select {
+    background-color: #333;
+    color: #fff;
+    border-color: #555;
+  }
+  
+  .setting-group input:focus,
+  .setting-group select:focus {
+    border-color: #66ccff;
+    box-shadow: 0 0 0 2px rgba(102, 204, 255, 0.2);
+  }
+  
+  .progress-bar {
+    background-color: #333;
+  }
+  
+  .progress-fill {
+    background: linear-gradient(90deg, #66ccff, #4da6d9);
+  }
+  
+  .preview-area {
+    background-color: #2a2a2a;
+    border-color: #444;
+  }
+  
+  .preview-box h3 {
+    color: #66ccff;
+  }
+  
+  .video-preview, 
+  .gif-preview {
+    border-color: #444;
+  }
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.settings-panel,
+.preview-area {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* フォーカス可能要素のアクセシビリティ */
+button:focus,
+input:focus,
+select:focus,
+.contact-mail:focus {
+  outline: 2px solid #007acc;
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  button:focus,
+  input:focus,
+  select:focus,
+  .contact-mail:focus {
+    outline-color: #66ccff;
+  }
+}

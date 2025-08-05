@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>動画→GIF変換ツール</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>🎬 Video to GIF Converter</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">ホーム</a></li>
+                <li><a href="#about">使い方</a></li>
+                <li><a href="#contact">お問い合わせ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>動画をGIFに変換</h2>
+        <p>MP4、AVI、MOV、WebMなどの動画ファイルを高品質なGIFアニメーションに変換できます。</p>
+
+        <div class="upload-area" id="uploadArea">
+            <p>📁 動画ファイルをここにドロップするか、クリックして選択してください</p>
+            <input type="file" id="videoInput" accept="video/*" style="display: none;">
+        </div>
+
+        <div class="settings-panel" id="settingsPanel" style="display: none;">
+            <h3>変換設定</h3>
+            <div class="setting-group">
+                <label for="startTime">開始時間（秒）：</label>
+                <input type="number" id="startTime" min="0" step="0.1" value="0">
+            </div>
+            <div class="setting-group">
+                <label for="duration">継続時間（秒）：</label>
+                <input type="number" id="duration" min="0.1" step="0.1" value="3">
+            </div>
+            <div class="setting-group">
+                <label for="width">幅（ピクセル）：</label>
+                <input type="number" id="width" min="50" max="1920" value="480">
+            </div>
+            <div class="setting-group">
+                <label for="fps">フレームレート（FPS）：</label>
+                <select id="fps">
+                    <option value="10">10 FPS</option>
+                    <option value="15" selected>15 FPS</option>
+                    <option value="20">20 FPS</option>
+                    <option value="30">30 FPS</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="quality">品質：</label>
+                <select id="quality">
+                    <option value="low">低品質（小さいファイルサイズ）</option>
+                    <option value="medium" selected>中品質</option>
+                    <option value="high">高品質（大きいファイルサイズ）</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="center-box">
+            <button class="contact-mail" id="convertBtn" style="display: none;">GIFに変換</button>
+        </div>
+
+        <div class="progress-bar" id="progressBar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="preview-area" id="previewArea">
+            <div class="preview-container">
+                <div class="preview-box">
+                    <h3>元動画</h3>
+                    <video class="video-preview" id="videoPreview" controls></video>
+                </div>
+                <div class="preview-box">
+                    <h3>変換結果</h3>
+                    <img class="gif-preview" id="gifPreview" alt="変換されたGIF">
+                    <br><br>
+                    <a class="contact-mail" id="downloadBtn" download="converted.gif" style="display: none;">GIFをダウンロード</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <p>※ 変換処理はブラウザ内で行われるため、動画ファイルがサーバーにアップロードされることはありません。</p>
+            <p>※ 大きなファイルや長時間の動画は変換に時間がかかる場合があります。</p>
+            <p>※ 推奨：ファイルサイズ50MB以下、長さ30秒以下の動画</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Video to GIF Converter. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
